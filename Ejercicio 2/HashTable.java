@@ -1,7 +1,8 @@
 package Ejercicios;
-
+import java.util.ArrayList;
 public class HashTable {
 	User usuario[] = new User[10];
+	ArrayList registros[] = new ArrayList[10]; //Para putEncadenamiento
 	int cant = 0;
 
 	public HashTable() {
@@ -19,6 +20,24 @@ public class HashTable {
 			us.setPosi(posi);
 			System.out.println("Se reemplazo un usuario previamente registrado.");
 		}
+	}
+	
+	public void putEncadenamiento(User us){
+		int posi=us.hashCode()%usuario.length;
+		ArrayList<User> temp;
+		if(registros[posi] == null){
+			registros[posi] = new ArrayList<>();
+			temp = registros[posi];
+			temp.add(us); //Se añade en la lista
+			cant++;
+			us.setPosi(posi);
+		}else{
+			temp = registros[posi];
+			temp.add(us); //Se añade en la lista
+			cant++;
+			us.setPosi(posi);
+		}
+		System.out.println("Se inserto un usuario nuevo.");
 	}
 
 	public void putLinearProbing(User us) {
@@ -90,14 +109,21 @@ public class HashTable {
 	}
 
 	public String toString() {
-		String text = "";
-		for (int i = 0; i < usuario.length; i++) {
-			if (usuario[i] != null) {
-				text = text + usuario[i].getPosi() + ")" + usuario[i].getName() + ": id(" + usuario[i].getid()
-						+ "), email(" + usuario[i].getEmail() + ")\n";
+		String text="";
+    		for(int i=0;i<usuario.length;i++) {
+    			if(usuario[i]!=null) {
+    				text=text+usuario[i];
+    			}
+    		}
+		//Por si inserta con putEncadenamiento
+		for(int i = 0; i < registros.length ; i++){
+			if(registros[i] != null){
+				for(int j = 0; j < registros[i].size() ; j++){
+					System.out.println(registros[i].get(j));
+				}
 			}
 		}
-		return text;
+    		return text;
 	}
 
 	public int hashCode() {

@@ -112,17 +112,9 @@ public class HashTable {
 		String text="";
     		for(int i=0;i<usuario.length;i++) {
     			if(usuario[i]!=null) {
-    				text=text+usuario[i];
+    				text=text+usuario[i].getPosi()+")"+usuario[i].getName()+": id("+usuario[i].getid()+"), email("+usuario[i].getEmail()+")\n";
     			}
     		}
-		//Por si inserta con putEncadenamiento
-		for(int i = 0; i < registros.length ; i++){
-			if(registros[i] != null){
-				for(int j = 0; j < registros[i].size() ; j++){
-					System.out.println(registros[i].get(j));
-				}
-			}
-		}
     		return text;
 	}
 
